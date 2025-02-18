@@ -55,7 +55,7 @@ keySubmit.Parent = keyFrame
 
 keySubmit.MouseButton1Click:Connect(function()
     if keyInput.Text == correctKey then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostHubBypass27/GhostBypass/refs/heads/main/RealCode"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostHubBypass27/GhostBypass/refs/heads/main/RealCode"))();
         keyGui:Destroy()
     else
         keyLabel.Text = "Incorrect Key, Try Again"
