@@ -129,7 +129,7 @@ discordLink.Size = UDim2.new(1, 0, 0.1, 0)
 discordLink.Position = UDim2.new(0, 0, 0.9, 0)
 discordLink.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 discordLink.BorderSizePixel = 0
-discordLink.Text = "Join our Discord: discord.gg/blahblah"
+discordLink.Text = "Join our Discord: https://discord.gg/5TH3ehxGrb"
 discordLink.TextSize = 14
 discordLink.TextColor3 = Color3.fromRGB(255, 255, 255)
 discordLink.Font = Enum.Font.GothamBold
@@ -165,4 +165,4 @@ end)
 
 -- Notifications
 notify("Welcome to Ghost Bypass👻", "Made By HEROBRINE29302")
-notify("Please support me by joining my Discord", "discord.gg/blahblah")
+notify("Please support me by joining my Discord", "https://discord.gg/5TH3ehxGrb")
