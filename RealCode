@@ -1,0 +1,168 @@
+local yapping = true
+
+local function Bypass(input)
+    local result = {}
+    for i = 1, #input do
+        local char = input:sub(i, i)
+        if char == " " then
+            table.insert(result, "_")
+        else
+            table.insert(result, ">" .. char)
+        end
+    end
+    local finalResult = table.concat(result)
+
+    local A_1 = finalResult
+    local A_2 = "All"
+
+    if game:GetService("TextChatService"):FindFirstChild("TextChannels") then
+        game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(A_1)
+    else
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(A_1, A_2)
+    end
+end
+
+local function notify(title, text)
+    local StarterGui = game:GetService("StarterGui")
+    StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Icon = "https://www.roblox.com/headshot-thumbnail/image?userId=HEROBRINE29302&width=420&height=420&format=png",
+        Duration = 10 -- Notification lasts 10 seconds
+    })
+end
+
+local gui = Instance.new("ScreenGui")
+local GhostMain = Instance.new("Frame")
+local GhostTitle = Instance.new("TextLabel")
+local TextBax = Instance.new("TextBox")
+local chat = Instance.new("TextButton")
+local endBtn = Instance.new("TextButton")
+local closeBtn = Instance.new("TextButton")
+local outerBtn = Instance.new("TextButton")
+local discordLink = Instance.new("TextLabel")
+
+-- GUI properties
+gui.Name = "GhostGui"
+gui.Parent = game:GetService("CoreGui")
+
+-- Main frame properties
+GhostMain.Size = UDim2.new(0.25, 0, 0.3, 0)
+GhostMain.Position = UDim2.new(0.375, 0, 0.35, 0)
+GhostMain.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+GhostMain.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GhostMain.BorderSizePixel = 0
+GhostMain.BackgroundTransparency = 0.1
+GhostMain.Active = true
+GhostMain.Draggable = true
+GhostMain.Parent = gui
+
+-- Title properties
+GhostTitle.Size = UDim2.new(1, 0, 0.15, 0)
+GhostTitle.Position = UDim2.new(0, 0, 0, 0)
+GhostTitle.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+GhostTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GhostTitle.Text = "Ghost Bypass (F*** OTHER BYPASS)"
+GhostTitle.TextSize = 14
+GhostTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+GhostTitle.Font = Enum.Font.GothamBold
+GhostTitle.Parent = GhostMain
+
+-- TextBox properties
+TextBax.Size = UDim2.new(0.8, 0, 0.25, 0)
+TextBax.Position = UDim2.new(0.1, 0, 0.25, 0)
+TextBax.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TextBax.BorderColor3 = Color3.fromRGB(45, 45, 45)
+TextBax.PlaceholderText = "(Chat)"
+TextBax.PlaceholderColor3 = Color3.fromRGB(200, 200, 200)
+TextBax.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBax.Font = Enum.Font.Gotham
+TextBax.Text = ""
+TextBax.TextSize = 15
+TextBax.Parent = GhostMain
+
+-- Chat button properties
+chat.Size = UDim2.new(0.3, 0, 0.15, 0)
+chat.Position = UDim2.new(0.35, 0, 0.55, 0)
+chat.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+chat.BorderColor3 = Color3.fromRGB(45, 45, 45)
+chat.Text = "Chat"
+chat.TextSize = 14
+chat.TextColor3 = Color3.fromRGB(255, 255, 255)
+chat.Font = Enum.Font.GothamBold
+chat.Parent = GhostMain
+
+-- End button properties
+endBtn.Size = UDim2.new(0.1, 0, 0.1, 0)
+endBtn.Position = UDim2.new(0.9, -5, 0.1, 5)
+endBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+endBtn.Text = "End"
+endBtn.TextSize = 14
+endBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+endBtn.Font = Enum.Font.GothamBold
+endBtn.Parent = GhostMain
+
+-- Close button properties
+closeBtn.Size = UDim2.new(0.1, 0, 0.1, 0)
+closeBtn.Position = UDim2.new(0.9, -5, 0, 5)
+closeBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+closeBtn.Text = "X"
+closeBtn.TextSize = 14
+closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.Parent = GhostMain
+
+-- Outer button properties
+outerBtn.Size = UDim2.new(0.1, 0, 0.05, 0)
+outerBtn.Position = UDim2.new(0.9, -5, 0.9, -5)
+outerBtn.BackgroundColor3 = Color3.fromRGB(0, 122, 255)
+outerBtn.BorderSizePixel = 0
+outerBtn.Text = "Toggle"
+outerBtn.TextSize = 14
+outerBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+outerBtn.Font = Enum.Font.GothamBold
+outerBtn.Parent = gui
+outerBtn.Draggable = true
+
+-- Discord link properties
+discordLink.Size = UDim2.new(1, 0, 0.1, 0)
+discordLink.Position = UDim2.new(0, 0, 0.9, 0)
+discordLink.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+discordLink.BorderSizePixel = 0
+discordLink.Text = "Join our Discord: discord.gg/blahblah"
+discordLink.TextSize = 14
+discordLink.TextColor3 = Color3.fromRGB(255, 255, 255)
+discordLink.Font = Enum.Font.GothamBold
+discordLink.Parent = GhostMain
+
+local guiVisible = true
+
+endBtn.MouseButton1Click:Connect(function()
+    gui:Destroy()
+end)
+
+closeBtn.MouseButton1Click:Connect(function()
+    guiVisible = not guiVisible
+    GhostMain.Visible = guiVisible
+end)
+
+outerBtn.MouseButton1Click:Connect(function()
+    guiVisible = not guiVisible
+    GhostMain.Visible = guiVisible
+end)
+
+chat.MouseButton1Click:Connect(function()
+    local inputString = TextBax.Text
+    Bypass(inputString)
+end)
+
+TextBax.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        local inputString = TextBax.Text
+        Bypass(inputString)
+    end
+end)
+
+-- Notifications
+notify("Welcome to Ghost Bypass👻", "Made By HEROBRINE29302")
+notify("Please support me by joining my Discord", "discord.gg/blahblah")
