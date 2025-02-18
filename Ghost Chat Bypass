@@ -5,6 +5,7 @@ local keyFrame = Instance.new("Frame")
 local keyLabel = Instance.new("TextLabel")
 local keyInput = Instance.new("TextBox")
 local keySubmit = Instance.new("TextButton")
+local keyClose = Instance.new("TextButton")
 
 -- Key GUI properties
 keyGui.Name = "KeyGui"
@@ -16,6 +17,8 @@ keyFrame.Position = UDim2.new(0.375, 0, 0.4, 0)
 keyFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 keyFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 keyFrame.BorderSizePixel = 0
+keyFrame.Active = true
+keyFrame.Draggable = true
 keyFrame.Parent = keyGui
 
 -- Key label properties
@@ -53,10 +56,30 @@ keySubmit.TextColor3 = Color3.fromRGB(255, 255, 255)
 keySubmit.Font = Enum.Font.GothamBold
 keySubmit.Parent = keyFrame
 
+-- Key close button properties
+keyClose.Size = UDim2.new(0.1, 0, 0.2, 0)
+keyClose.Position = UDim2.new(0.9, 0, 0, 0)
+keyClose.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+keyClose.BorderColor3 = Color3.fromRGB(45, 45, 45)
+keyClose.Text = "X"
+keyClose.TextSize = 14
+keyClose.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyClose.Font = Enum.Font.GothamBold
+keyClose.Parent = keyFrame
+
+-- Function to destroy the GUI
+local function destroyGui()
+    keyGui:Destroy()
+end
+
+-- Connect the close button to the destroy function
+keyClose.MouseButton1Click:Connect(destroyGui)
+
+-- Function to handle key submission
 keySubmit.MouseButton1Click:Connect(function()
     if keyInput.Text == correctKey then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostHubBypass27/GhostBypass/refs/heads/main/RealCode"))();
-        keyGui:Destroy() 
+        destroyGui()
     else
         keyLabel.Text = "Incorrect Key, Try Again"
     end
