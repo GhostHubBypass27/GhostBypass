@@ -1,0 +1,63 @@
+local correctKey = "FUCKOTHERBYPASS"
+
+local keyGui = Instance.new("ScreenGui")
+local keyFrame = Instance.new("Frame")
+local keyLabel = Instance.new("TextLabel")
+local keyInput = Instance.new("TextBox")
+local keySubmit = Instance.new("TextButton")
+
+-- Key GUI properties
+keyGui.Name = "KeyGui"
+keyGui.Parent = game:GetService("CoreGui")
+
+-- Key frame properties
+keyFrame.Size = UDim2.new(0.25, 0, 0.2, 0)
+keyFrame.Position = UDim2.new(0.375, 0, 0.4, 0)
+keyFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+keyFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+keyFrame.BorderSizePixel = 0
+keyFrame.Parent = keyGui
+
+-- Key label properties
+keyLabel.Size = UDim2.new(1, 0, 0.4, 0)
+keyLabel.Position = UDim2.new(0, 0, 0, 0)
+keyLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+keyLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+keyLabel.Text = "Enter Key"
+keyLabel.TextSize = 14
+keyLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyLabel.Font = Enum.Font.GothamBold
+keyLabel.Parent = keyFrame
+
+-- Key input properties
+keyInput.Size = UDim2.new(0.8, 0, 0.4, 0)
+keyInput.Position = UDim2.new(0.1, 0, 0.5, 0)
+keyInput.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+keyInput.BorderColor3 = Color3.fromRGB(45, 45, 45)
+keyInput.PlaceholderText = "Get It At https://discord.gg/5TH3ehxGrb"
+keyInput.PlaceholderColor3 = Color3.fromRGB(200, 200, 200)
+keyInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyInput.Font = Enum.Font.Gotham
+keyInput.Text = ""
+keyInput.TextSize = 15
+keyInput.Parent = keyFrame
+
+-- Key submit button properties
+keySubmit.Size = UDim2.new(0.3, 0, 0.2, 0)
+keySubmit.Position = UDim2.new(0.35, 0, 0.75, 0)
+keySubmit.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+keySubmit.BorderColor3 = Color3.fromRGB(45, 45, 45)
+keySubmit.Text = "Submit"
+keySubmit.TextSize = 14
+keySubmit.TextColor3 = Color3.fromRGB(255, 255, 255)
+keySubmit.Font = Enum.Font.GothamBold
+keySubmit.Parent = keyFrame
+
+keySubmit.MouseButton1Click:Connect(function()
+    if keyInput.Text == correctKey then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostHubBypass27/GhostBypass/refs/heads/main/RealCode"))()
+        keyGui:Destroy()
+    else
+        keyLabel.Text = "Incorrect Key, Try Again"
+    end
+end)
