@@ -1,0 +1,131 @@
+-- Create GUI Elements
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local FirstParagraphBox = Instance.new("TextBox")
+local PrefixBox = Instance.new("TextBox")
+local SecondParagraphBox = Instance.new("TextBox")
+local SubmitButton = Instance.new("TextButton")
+local EndButton = Instance.new("TextButton")
+local ToggleButton = Instance.new("TextButton")
+local OuterButton = Instance.new("TextButton")
+
+ScreenGui.Parent = game.CoreGui
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.new(0.15, 0.15, 0.25)
+Frame.Position = UDim2.new(0.5, -75, 0.5, -100)
+Frame.Size = UDim2.new(0, 150, 0, 200)
+Frame.Active = true
+Frame.Draggable = true
+
+Title.Parent = Frame
+Title.BackgroundColor3 = Color3.new(0.1, 0.1, 0.2)
+Title.BorderSizePixel = 0
+Title.Size = UDim2.new(1, 0, 0.2, 0)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.Text = "Ghost Hub"
+Title.TextColor3 = Color3.new(1, 1, 1)
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 14
+
+FirstParagraphBox.Parent = Frame
+FirstParagraphBox.BackgroundColor3 = Color3.new(0.2, 0.2, 0.3)
+FirstParagraphBox.BorderSizePixel = 0
+FirstParagraphBox.Position = UDim2.new(0.1, 0, 0.25, 0)
+FirstParagraphBox.Size = UDim2.new(0.8, 0, 0.2, 0)
+FirstParagraphBox.PlaceholderText = "Pls type in Yo"
+FirstParagraphBox.TextColor3 = Color3.new(1, 1, 1)
+
+PrefixBox.Parent = Frame
+PrefixBox.BackgroundColor3 = Color3.new(0.2, 0.2, 0.3)
+PrefixBox.BorderSizePixel = 0
+PrefixBox.Position = UDim2.new(0.1, 0, 0.5, 0)
+PrefixBox.Size = UDim2.new(0.8, 0, 0.2, 0)
+PrefixBox.PlaceholderText = "Prefix EX-System"
+PrefixBox.TextColor3 = Color3.new(1, 1, 1)
+
+SecondParagraphBox.Parent = Frame
+SecondParagraphBox.BackgroundColor3 = Color3.new(0.2, 0.2, 0.3)
+SecondParagraphBox.BorderSizePixel = 0
+SecondParagraphBox.Position = UDim2.new(0.1, 0, 0.75, 0)
+SecondParagraphBox.Size = UDim2.new(0.8, 0, 0.2, 0)
+SecondParagraphBox.PlaceholderText = "Prefix message(Main)"
+SecondParagraphBox.TextColor3 = Color3.new(1, 1, 1)
+
+SubmitButton.Parent = Frame
+SubmitButton.BackgroundColor3 = Color3.new(0.3, 0.8, 0.3)
+SubmitButton.BorderSizePixel = 0
+SubmitButton.Position = UDim2.new(0.1, 0, 0.95, 0)
+SubmitButton.Size = UDim2.new(0.8, 0, 0.15, 0)
+SubmitButton.Text = "Submit"
+SubmitButton.TextColor3 = Color3.new(1, 1, 1)
+
+EndButton.Parent = Frame
+EndButton.BackgroundColor3 = Color3.new(1, 0, 0)
+EndButton.BorderSizePixel = 0
+EndButton.Position = UDim2.new(0.85, 0, 0, 0)
+EndButton.Size = UDim2.new(0.15, 0, 0.15, 0)
+EndButton.Text = "X"
+EndButton.TextColor3 = Color3.new(1, 1, 1)
+
+ToggleButton.Parent = Frame
+ToggleButton.BackgroundColor3 = Color3.new(1, 1, 0)
+ToggleButton.BorderSizePixel = 0
+ToggleButton.Position = UDim2.new(0.7, 0, 0, 0)
+ToggleButton.Size = UDim2.new(0.15, 0, 0.15, 0)
+ToggleButton.Text = "-"
+ToggleButton.TextColor3 = Color3.new(0, 0, 0)
+
+OuterButton.Parent = ScreenGui
+OuterButton.Size = UDim2.new(0.1, 0, 0.05, 0)
+OuterButton.Position = UDim2.new(0.9, -5, 0.9, -5)
+OuterButton.BackgroundColor3 = Color3.new(0.2, 0.8, 0.2)
+OuterButton.BorderSizePixel = 0
+OuterButton.Text = "Toggle"
+OuterButton.TextSize = 14
+OuterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+OuterButton.Font = Enum.Font.GothamBold
+OuterButton.Draggable = true
+
+-- Toggle visibility of the main Frame
+ToggleButton.MouseButton1Click:Connect(function()
+    Frame.Visible = not Frame.Visible
+end)
+
+-- Destroy the GUI
+EndButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+-- Toggle visibility of the main Frame using OuterButton
+OuterButton.MouseButton1Click:Connect(function()
+    Frame.Visible = not Frame.Visible
+end)
+
+-- Script functionality
+SubmitButton.MouseButton1Click:Connect(function()
+    local firstParagraph = FirstParagraphBox.Text
+    local prefix = PrefixBox.Text
+    local secondParagraphMessage = SecondParagraphBox.Text
+
+    -- Calculate the number of spaces needed based on the length of the first paragraph
+    local lengthOfFirstParagraph = #firstParagraph
+    local totalLength = 97 -- Adjust based on your needs (total length should be around 97)
+    local spacesNeeded = totalLength - lengthOfFirstParagraph
+    local spacer = string.rep(" ", spacesNeeded)
+
+    local formattedSecondParagraph = spacer .. "{" .. prefix .. "}: " .. secondParagraphMessage
+
+    local finalOutput = firstParagraph .. formattedSecondParagraph
+    
+    -- Send the message in Roblox chat
+    local A_1 = finalOutput
+    local A_2 = "All"
+    
+    if game:GetService("TextChatService"):FindFirstChild("TextChannels") then
+        game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(A_1)
+    else
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(A_1, A_2)
+    end
+end)
