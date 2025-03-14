@@ -1,0 +1,84 @@
+local player = game.Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+-- Create a frame to hold the buttons with a nice background
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 400, 0, 250)
+frame.Position = UDim2.new(0.5, -200, 0.5, -125)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BackgroundTransparency = 0.6
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+
+-- Add a rounded corner for the frame
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 20)
+corner.Parent = frame
+
+-- Create the title for the GUI
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, 0, 0, 40)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "Capture Points"
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextSize = 24
+titleLabel.TextXAlignment = Enum.TextXAlignment.Center -- Fixed property name
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.Parent = frame
+
+-- Function to teleport the player
+local function teleport(position)
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(position)
+    end
+end
+
+-- Utility function for creating buttons
+local function createButton(text, position, targetPosition)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 350, 0, 50)
+    button.Position = position
+    button.Text = text
+    button.BackgroundColor3 = Color3.fromRGB(50, 50, 255)
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Font = Enum.Font.Gotham
+    button.TextSize = 18
+    button.BorderSizePixel = 0
+    button.AutoButtonColor = true
+    button.Parent = frame
+
+    -- Adding rounded corners to the buttons
+    local buttonCorner = Instance.new("UICorner")
+    buttonCorner.CornerRadius = UDim.new(0, 12)
+    buttonCorner.Parent = button
+
+    -- Button hover effect
+    button.MouseEnter:Connect(function()
+        button.BackgroundColor3 = Color3.fromRGB(70, 70, 255) -- Darker when hover
+    end)
+
+    button.MouseLeave:Connect(function()
+        button.BackgroundColor3 = Color3.fromRGB(50, 50, 255) -- Normal when hover ends
+    end)
+
+    -- Teleport on button click
+    button.MouseButton1Click:Connect(function()
+        teleport(targetPosition)
+    end)
+end
+
+-- Create the buttons
+createButton("Capture Point A", UDim2.new(0.5, -175, 0, 50), Vector3.new(-584.799, 185.612, -1.15))
+createButton("Capture Point B", UDim2.new(0.5, -175, 0, 110), Vector3.new(764.151, 218.612, -0.7))
+createButton("Capture Point C", UDim2.new(0.5, -175, 0, 170), Vector3.new(254.301, 172.112, 1.1))
+
+-- Add a UI gradient background for more style
+local gradient = Instance.new("UIGradient")
+gradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(25, 25, 25)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(50, 50, 50))
+})
+gradient.Rotation = 45  -- Rotation should be set after ColorSequence
+gradient.Parent = frame -- Corrected placement
